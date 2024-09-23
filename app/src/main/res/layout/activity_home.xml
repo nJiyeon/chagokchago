@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".view.HomeActivity">
+
+
+    <ImageView
+        android:layout_width="152dp"
+        android:layout_height="228dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/app_icon" />
+
+    <Button
+        android:id="@+id/useParkingLotBtn"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:text="주차장 사용"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/btn_default"
+        android:layout_margin="10dp" />
+    <Button
+        android:id="@+id/registerParkingLotBtn"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:text="주차장 등록"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/btn_default"
+        android:layout_margin="10dp" />
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:layout_marginTop="50dp" />
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원이 아니신가요?"
+        android:textSize="10sp" />
+</LinearLayout>

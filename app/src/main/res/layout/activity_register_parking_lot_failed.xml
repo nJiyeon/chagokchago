@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".view.HomeActivity"
+    android:padding="20dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="주차장 등록이 "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="거절"
+                android:textColor="#D10000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="되었습니다."
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/white_round_rectangle"
+            android:padding="20dp"
+            android:layout_marginBottom="30dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="토지, 건물 관계입증 서류 미비"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="서류가 제대로 촬영되었는지 확인 후에 다시 등록해주세요."
+                android:textColor="@color/gray_font"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="문의하기"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"/>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:background="@drawable/white_round_rectangle"
+            android:padding="20dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="문의 내용을 작성해주세요."
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center|bottom">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/goToHomeBtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="홈 화면으로"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:background="@drawable/btn_default"
+            android:layout_marginBottom="15dp" />
+        <Button
+            android:id="@+id/goToRegisterParkingLotBtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="다시 등록하기"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:background="@drawable/btn_default"
+            android:layout_marginBottom="30dp"/>
+    </LinearLayout>
+</LinearLayout>

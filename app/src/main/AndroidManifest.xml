@@ -22,7 +22,7 @@
             android:value="@string/KAKAO_API_KEY" />
 
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.MainActivity" />
         <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.ReserveParkingLotActivity" />
+        <activity android:name=".view.RegisterParkingLotActivity" />
+        <activity android:name=".view.RegisterParkingLotFailedActivity" />
+        <activity android:name=".view.RegisterParkingLotSuccessActivity" />
         <activity android:name=".view.ChargeLogActivity" />
         <activity android:name=".view.ChargeActivity" />
         <activity android:name=".view.MyPageActivity" />
