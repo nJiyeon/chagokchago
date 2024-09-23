@@ -31,6 +31,9 @@
         </activity>
 
         <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.ChargeLogActivity" />
+        <activity android:name=".view.ChargeActivity" />
+        <activity android:name=".view.MyPageActivity" />
     </application>
 
 </manifest>

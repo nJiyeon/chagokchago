@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kakao.vectormap.*
 import com.kakao.vectormap.camera.CameraAnimation
@@ -26,6 +27,7 @@ import com.capibara.chagokchago.model.Location
 import com.capibara.chagokchago.model.repository.LocationSearcher
 import com.capibara.chagokchago.viewmodel.KeywordViewModel
 import com.capibara.chagokchago.viewmodel.MainViewModel
+import com.google.android.material.navigation.NavigationView
 import com.kakao.vectormap.label.LabelLayer
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var locationSearcher: LocationSearcher
 
+    private lateinit var drawerLayout: DrawerLayout // 네비게이션 드로어
     private lateinit var errorLayout: RelativeLayout
     private lateinit var errorMessage: TextView
     private lateinit var errorDetails: TextView
@@ -67,6 +70,36 @@ class MainActivity : AppCompatActivity() {
 
         // View 초기화
         initializeViews(binding)
+
+        // DrawerLayout 초기화
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val menuButton: ImageButton = findViewById(R.id.menu_button)
+        menuButton.setOnClickListener {
+            // 메뉴 버튼 클릭 시 네비게이션 드로어 열기
+            drawerLayout.openDrawer(androidx.core.view.GravityCompat.START)
+        }
+        // NavigationView에서 메뉴 항목 클릭 리스너 설정
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_parking_ticket -> {
+                    Toast.makeText(this, "주차권 선택", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_coupon -> {
+                    Toast.makeText(this, "쿠폰함 선택", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_credit -> {
+                    Toast.makeText(this, "충전금 선택", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, ChargeLogActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_points -> {
+                    Toast.makeText(this, "적립금 선택", Toast.LENGTH_SHORT).show()
+                }
+            }
+            drawerLayout.closeDrawer(androidx.core.view.GravityCompat.START)
+            true
+        }
 
         // ActivityResultLauncher 초기화
         searchResultLauncher = registerForActivityResult(
