@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_parking_ticket"
+        android:icon="@drawable/ic_next"
+        android:title="주차권"
+        android:titleCondensed="0매" />
+
+    <item
+        android:id="@+id/nav_coupon"
+        android:icon="@drawable/ic_next"
+        android:title="쿠폰함"
+        android:titleCondensed="0매" />
+
+    <item
+        android:id="@+id/nav_credit"
+        android:icon="@drawable/ic_next"
+        android:title="충전금"
+        android:titleCondensed="0매" />
+
+    <item
+        android:id="@+id/nav_points"
+        android:icon="@drawable/ic_next"
+        android:title="적립금"
+        android:titleCondensed="0매" />
+</menu>

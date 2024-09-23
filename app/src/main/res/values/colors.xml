@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--초록색-->
+    <color name="dark_green">#115400</color>
+    <color name="kaki">#6B8464</color>
+    <color name="light_green">#83B576</color>
+
+    <!--회색-->
+    <color name="gray_font">#8E8E8E</color>
+    <color name="gray_spot">#D9D9D9</color>
+    <color name="gray_square">#E1E1E1</color>
 </resources>
