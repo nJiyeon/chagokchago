@@ -14,28 +14,28 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kakao.vectormap.*
 import com.kakao.vectormap.camera.CameraAnimation
 import com.kakao.vectormap.camera.CameraUpdateFactory
-import com.kakao.vectormap.label.LabelLayer
-import com.kakao.vectormap.label.LabelOptions
-import com.kakao.vectormap.label.LabelStyle
-import com.kakao.vectormap.label.LabelStyles
-import com.kakao.vectormap.label.LabelTextStyle
 import com.capibara.chagokchago.R
 import com.capibara.chagokchago.databinding.ActivityMainBinding
 import com.capibara.chagokchago.model.Location
 import com.capibara.chagokchago.model.repository.LocationSearcher
 import com.capibara.chagokchago.viewmodel.KeywordViewModel
 import com.capibara.chagokchago.viewmodel.MainViewModel
+import com.kakao.vectormap.label.LabelLayer
+import com.kakao.vectormap.label.LabelOptions
+import com.kakao.vectormap.label.LabelStyle
+import com.kakao.vectormap.label.LabelStyles
+import com.kakao.vectormap.label.LabelTextStyle
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordItemClickListener {
+class MainActivity : AppCompatActivity() {
 
     private var mapView: MapView? = null
     private var kakaoMap: KakaoMap? = null
@@ -60,11 +60,9 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
-            R.layout.activity_main
-        )
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this // 생명주기 소유자 설정
-        binding.viewModel = mainViewModel // ViewModel 바인딩
+        binding.viewModel = mainViewModel // MainViewModel 바인딩
         binding.keywordViewModel = keywordViewModel // Keyword ViewModel 바인딩
 
         // View 초기화
@@ -78,7 +76,7 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
         }
 
         // MapView 초기화 및 맵 라이프사이클 콜백 설정
-        mapView = findViewById(R.id.map_view)
+        mapView = binding.mapView
         mapView?.start(object : MapLifeCycleCallback() {
             override fun onMapDestroy() {
                 Log.d(TAG, "Map destroyed")
@@ -97,31 +95,38 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
         })
 
         // 검색창 클릭 시 검색 페이지로 이동
-        val searchEditText = findViewById<EditText>(R.id.search_edit_text)
-        searchEditText.setOnClickListener {
+        binding.searchEditText.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             searchResultLauncher.launch(intent)
         }
 
-        // Observe the last marker position
-        mainViewModel.lastMarkerPosition.observe(this, Observer { location: Location? -> // 타입 명시적으로 지정
-            location?.let { loc -> // 변수 이름을 명확하게 변경
+        // 메뉴 버튼 클릭 시 네비게이션 드로어 열기
+        binding.menuButton.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+
+        // ViewModel의 마지막 마커 위치 관찰
+        mainViewModel.lastMarkerPosition.observe(this) { location: Location? ->
+            location?.let { loc ->
                 Log.d(TAG, "Loaded last marker position: lat=${loc.latitude}, lon=${loc.longitude}, placeName=${loc.place}, roadAddressName=${loc.address}")
                 addLabel(loc)
                 val position = LatLng.from(loc.latitude, loc.longitude)
                 moveCamera(position)
                 updateBottomSheet(loc.place, loc.address)
             }
-        })
+        }
     }
 
-    private fun initializeViews(binding: ActivityMainBinding) { // 바인딩을 통해 초기화
+    private fun initializeViews(binding: ActivityMainBinding) {
+        // 에러 레이아웃 설정
         errorLayout = binding.errorLayout
         errorMessage = binding.errorMessage
         errorDetails = binding.errorDetails
         retryButton = binding.retryButton
         retryButton.setOnClickListener { onRetryButtonClick() }
 
+        // BottomSheet 설정
         bottomSheetLayout = binding.bottomSheetLayout
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
         bottomSheetTitle = binding.bottomSheetTitle
@@ -146,7 +151,7 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
 
         Log.d(TAG, "Search result: $placeName, $roadAddressName, $latitude, $longitude")
 
-        // latitude와 longitude 값을 Double로 명시적으로 변환하여 Location 객체를 생성
+        // 검색 결과 위치로 이동
         val location = Location(place = placeName, address = roadAddressName, category = "", latitude = latitude, longitude = longitude)
         addLabel(location)
         mainViewModel.saveLastMarkerPosition(location)
@@ -156,19 +161,7 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        mapView?.resume()  // MapView의 resume 호출
-        Log.d(TAG, "MapView resumed")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView?.pause()  // MapView의 pause 호출
-        Log.d(TAG, "MapView paused")
-    }
-
-    fun showErrorScreen(error: Exception) {
+    private fun showErrorScreen(error: Exception) {
         errorLayout.visibility = View.VISIBLE
         errorMessage.text = getString(R.string.map_error_message)
         errorDetails.text = error.message
@@ -196,13 +189,9 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
         })
     }
 
-    private fun addLabel(location: Location) { // 변수 이름 변경
+    private fun addLabel(location: Location) {
         val placeName = location.place
-        val roadAddressName = location.address
-        val latitude = location.latitude
-        val longitude = location.longitude
-
-        val position = LatLng.from(latitude, longitude)
+        val position = LatLng.from(location.latitude, location.longitude)
         val styles = kakaoMap?.labelManager?.addLabelStyles(
             LabelStyles.from(
                 LabelStyle.from(R.drawable.pin).setZoomLevel(DEFAULT_ZOOM_LEVEL),
@@ -219,7 +208,7 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
         )
 
         moveCamera(position)
-        updateBottomSheet(placeName, roadAddressName)
+        updateBottomSheet(placeName, location.address)
     }
 
     private fun moveCamera(position: LatLng) {
@@ -236,18 +225,16 @@ class MainActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeywordIt
         bottomSheetLayout.visibility = View.VISIBLE
     }
 
-    override fun onKeywordItemClick(keyword: String) {
-        // 아무 작업도 수행하지 않음
+    override fun onResume() {
+        super.onResume()
+        mapView?.resume()
+        Log.d(TAG, "MapView resumed")
     }
 
-    override fun onKeywordItemDeleteClick(keyword: String) {
-        // 아무 작업도 수행하지 않음
-    }
-
-    override fun onSearchItemClick(location: Location) { // 변수 이름 변경
-        // 검색 결과 목록에서 항목을 선택했을 때의 동작을 정의
-        addLabel(location)
-        mainViewModel.saveLastMarkerPosition(location)
+    override fun onPause() {
+        super.onPause()
+        mapView?.pause()
+        Log.d(TAG, "MapView paused")
     }
 
     companion object {
