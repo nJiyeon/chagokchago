@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capibara.chagokchago.R
+import com.capibara.chagokchago.model.RegisterRequest
+import com.capibara.chagokchago.model.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
