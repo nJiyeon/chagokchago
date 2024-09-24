@@ -1,7 +1,7 @@
 package com.capibara.chagokchago.viewmodel
 
 import androidx.lifecycle.*
-import com.capibara.chagokchago.model.LocationDto
+import com.capibara.chagokchago.model.dto.LocationDto
 import com.capibara.chagokchago.model.api.KakaoLocalApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

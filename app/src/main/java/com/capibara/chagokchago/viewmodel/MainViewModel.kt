@@ -7,7 +7,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.capibara.chagokchago.model.LocationDto
+import com.capibara.chagokchago.model.dto.LocationDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

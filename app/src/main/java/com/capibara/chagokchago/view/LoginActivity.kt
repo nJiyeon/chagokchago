@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capibara.chagokchago.databinding.ActivityLoginBinding
-import com.capibara.chagokchago.model.LoginRequestDto
+import com.capibara.chagokchago.model.dto.LoginRequestDto
 
 class LoginActivity : AppCompatActivity() {
 

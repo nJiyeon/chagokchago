@@ -4,7 +4,7 @@ import com.capibara.chagokchago.model.database.AppDatabase
 import com.capibara.chagokchago.model.repository.KeywordDao
 import com.capibara.chagokchago.model.repository.KeywordRepository
 import com.capibara.chagokchago.model.repository.LocationDao
-import com.capibara.chagokchago.model.repository.LocationSearcher
+import com.capibara.chagokchago.model.repository.LocationRepository
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
@@ -50,7 +50,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideLocationSearcher(locationDao: LocationDao): LocationSearcher {
-        return LocationSearcher(locationDao)
+    fun provideLocationSearcher(locationDao: LocationDao): LocationRepository {
+        return LocationRepository(locationDao)
     }
 }

@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.capibara.chagokchago.R
-import com.capibara.chagokchago.model.BankItemDto
+import com.capibara.chagokchago.model.dto.BankItemDto
 class BankSpinnerAdapter(context: Context, private val resource: Int, private val items: List<BankItemDto>)
     : ArrayAdapter<BankItemDto>(context, resource, items) {
 

@@ -22,8 +22,8 @@ import com.kakao.vectormap.camera.CameraAnimation
 import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.capibara.chagokchago.R
 import com.capibara.chagokchago.databinding.ActivityMainBinding
-import com.capibara.chagokchago.model.LocationDto
-import com.capibara.chagokchago.model.repository.LocationSearcher
+import com.capibara.chagokchago.model.dto.LocationDto
+import com.capibara.chagokchago.model.repository.LocationRepository
 import com.capibara.chagokchago.viewmodel.KeywordViewModel
 import com.capibara.chagokchago.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     private var labelLayer: LabelLayer? = null
 
     @Inject
-    lateinit var locationSearcher: LocationSearcher
+    lateinit var locationSearcher: LocationRepository
 
     private lateinit var drawerLayout: DrawerLayout // 네비게이션 드로어
     private lateinit var errorLayout: RelativeLayout

@@ -1,4 +1,4 @@
-package com.capibara.chagokchago.model
+package com.capibara.chagokchago.model.dto
 
 data class LoginRequestDto(
     val userName: String,

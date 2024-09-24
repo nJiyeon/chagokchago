@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.capibara.chagokchago.R
 import com.capibara.chagokchago.databinding.ActivityChargeBinding
-import com.capibara.chagokchago.model.BankItemDto
+import com.capibara.chagokchago.model.dto.BankItemDto
 import com.capibara.chagokchago.model.adapter.BankSpinnerAdapter
 
 class ChargeActivity : AppCompatActivity() {

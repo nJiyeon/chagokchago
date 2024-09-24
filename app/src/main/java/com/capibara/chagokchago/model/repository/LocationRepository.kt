@@ -1,12 +1,12 @@
 package com.capibara.chagokchago.model.repository
 
 
-import com.capibara.chagokchago.model.LocationDto
+import com.capibara.chagokchago.model.dto.LocationDto
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LocationSearcher @Inject constructor(private val locationDao: LocationDao) {
+class LocationRepository @Inject constructor(private val locationDao: LocationDao) {
 
     suspend fun search(keyword: String): List<LocationDto> {
         val locationEntities = locationDao.searchByCategory(keyword)

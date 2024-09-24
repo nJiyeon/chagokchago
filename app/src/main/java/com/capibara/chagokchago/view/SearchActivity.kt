@@ -10,7 +10,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capibara.chagokchago.databinding.ActivitySearchBinding
-import com.capibara.chagokchago.model.LocationDto
+import com.capibara.chagokchago.model.dto.LocationDto
 import com.capibara.chagokchago.model.adapter.KeywordAdapter
 import com.capibara.chagokchago.model.adapter.SearchAdapter
 import com.capibara.chagokchago.viewmodel.KeywordViewModel

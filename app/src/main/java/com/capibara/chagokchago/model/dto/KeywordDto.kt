@@ -1,4 +1,4 @@
-package com.capibara.chagokchago.model
+package com.capibara.chagokchago.model.dto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

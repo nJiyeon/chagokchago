@@ -2,7 +2,7 @@ package com.capibara.chagokchago.model.api
 
 import retrofit2.Call
 import retrofit2.http.POST
-import com.capibara.chagokchago.model.RegisterRequestDto
+import com.capibara.chagokchago.model.dto.RegisterRequestDto
 import retrofit2.http.Body
 
 
