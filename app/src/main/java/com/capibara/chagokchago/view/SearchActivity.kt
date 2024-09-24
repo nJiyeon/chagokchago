@@ -74,6 +74,7 @@ class SearchActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeyword
         val resultIntent = Intent().apply {
             putExtra("place_name", location.place)
             putExtra("road_address_name", location.address)
+            putExtra("category_group_name", location.category)
             putExtra("latitude", location.latitude)
             putExtra("longitude", location.longitude)
         }

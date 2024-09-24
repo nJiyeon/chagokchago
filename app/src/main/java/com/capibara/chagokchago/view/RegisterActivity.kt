@@ -61,7 +61,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Log.e("NetworkError", "네트워크 오류: ${t.message}", t)
+                    //Log.e("NetworkError", "네트워크 오류: ${t.message}", t)
                     t.printStackTrace()
                     Toast.makeText(this@RegisterActivity, "네트워크 오류: ${t.message}", Toast.LENGTH_SHORT).show()
                 }

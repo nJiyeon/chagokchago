@@ -111,18 +111,18 @@ class MainActivity : AppCompatActivity() {
         mapView = binding.mapView
         mapView?.start(object : MapLifeCycleCallback() {
             override fun onMapDestroy() {
-                Log.d(TAG, "Map destroyed")
+                //Log.d(TAG, "Map destroyed")
             }
 
             override fun onMapError(error: Exception) {
-                Log.e(TAG, "Map error", error)
+                //Log.e(TAG, "Map error", error)
                 showErrorScreen(error)
             }
         }, object : KakaoMapReadyCallback() {
             override fun onMapReady(map: KakaoMap) {
                 kakaoMap = map
                 labelLayer = kakaoMap?.labelManager?.layer
-                Log.d(TAG, "Map is ready")
+                //Log.d(TAG, "Map is ready")
             }
         })
 
@@ -171,8 +171,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        // intent로 SearchActivity 데이터 받음
         val placeName = data.getStringExtra("place_name")
         val roadAddressName = data.getStringExtra("road_address_name")
+        val roadCategory = data.getStringExtra("category_group_name")
         val latitude = data.getDoubleExtra("latitude", 0.0)
         val longitude = data.getDoubleExtra("longitude", 0.0)
 
@@ -181,12 +183,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        Log.d(TAG, "Search result: $placeName, $roadAddressName, $latitude, $longitude")
+        //Log.d(TAG, "Search result: $placeName, $roadAddressName, $latitude, $longitude")
 
         // 검색 결과 위치로 이동
-        val location = LocationDto(place = placeName, address = roadAddressName, category = "", latitude = latitude, longitude = longitude)
-        addLabel(location)
-        mainViewModel.saveLastMarkerPosition(location)
+        val location = roadCategory?.let { LocationDto(place = placeName, address = roadAddressName, category = it, latitude = latitude, longitude = longitude) }
+        if (location != null) {
+            addLabel(location)
+        }
+        if (location != null) {
+            mainViewModel.saveLastMarkerPosition(location)
+        }
     }
 
     private fun showToast(message: String) {
