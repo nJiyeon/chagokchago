@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capibara.chagokchago.databinding.ActivitySearchBinding
 import com.capibara.chagokchago.model.Location
+import com.capibara.chagokchago.OnKeywordItemClickListener
+import com.capibara.chagokchago.OnSearchItemClickListener
 import com.capibara.chagokchago.model.adapter.KeywordAdapter
 import com.capibara.chagokchago.model.adapter.SearchAdapter
 import com.capibara.chagokchago.viewmodel.KeywordViewModel
