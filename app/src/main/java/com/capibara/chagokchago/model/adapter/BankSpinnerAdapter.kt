@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.capibara.chagokchago.R
-import com.capibara.chagokchago.model.BankItem
-class BankSpinnerAdapter(context: Context, private val resource: Int, private val items: List<BankItem>)
-    : ArrayAdapter<BankItem>(context, resource, items) {
+import com.capibara.chagokchago.model.BankItemDto
+class BankSpinnerAdapter(context: Context, private val resource: Int, private val items: List<BankItemDto>)
+    : ArrayAdapter<BankItemDto>(context, resource, items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createItemView(position, convertView, parent)

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.RelativeLayout
@@ -23,7 +22,7 @@ import com.kakao.vectormap.camera.CameraAnimation
 import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.capibara.chagokchago.R
 import com.capibara.chagokchago.databinding.ActivityMainBinding
-import com.capibara.chagokchago.model.Location
+import com.capibara.chagokchago.model.LocationDto
 import com.capibara.chagokchago.model.repository.LocationSearcher
 import com.capibara.chagokchago.viewmodel.KeywordViewModel
 import com.capibara.chagokchago.viewmodel.MainViewModel
@@ -140,7 +139,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // ViewModel의 마지막 마커 위치 관찰
-        mainViewModel.lastMarkerPosition.observe(this) { location: Location? ->
+        mainViewModel.lastMarkerPosition.observe(this) { location: LocationDto? ->
             location?.let { loc ->
                 Log.d(TAG, "Loaded last marker position: lat=${loc.latitude}, lon=${loc.longitude}, placeName=${loc.place}, roadAddressName=${loc.address}")
                 addLabel(loc)
@@ -185,7 +184,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Search result: $placeName, $roadAddressName, $latitude, $longitude")
 
         // 검색 결과 위치로 이동
-        val location = Location(place = placeName, address = roadAddressName, category = "", latitude = latitude, longitude = longitude)
+        val location = LocationDto(place = placeName, address = roadAddressName, category = "", latitude = latitude, longitude = longitude)
         addLabel(location)
         mainViewModel.saveLastMarkerPosition(location)
     }
@@ -222,7 +221,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun addLabel(location: Location) {
+    private fun addLabel(location: LocationDto) {
         val placeName = location.place
         val position = LatLng.from(location.latitude, location.longitude)
         val styles = kakaoMap?.labelManager?.addLabelStyles(

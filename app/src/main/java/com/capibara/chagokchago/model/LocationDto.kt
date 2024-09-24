@@ -1,6 +1,6 @@
 package com.capibara.chagokchago.model
 
-data class Location(
+data class LocationDto(
     val place: String,
     val address: String,
     val category: String,

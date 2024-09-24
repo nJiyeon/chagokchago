@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capibara.chagokchago.R
-import com.capibara.chagokchago.model.RegisterRequest
+import com.capibara.chagokchago.model.RegisterRequestDto
 import com.capibara.chagokchago.model.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
             val name = editTextName.text.toString()
 
             // 회원가입 요청에 필요한 데이터 생성
-            val registerRequest = RegisterRequest(userName, password, telephone, name)
+            val registerRequest = RegisterRequestDto(userName, password, telephone, name)
 
             // Retrofit을 사용하여 API 호출
             RetrofitClient.apiService.registerUser(registerRequest).enqueue(object : Callback<Void> {

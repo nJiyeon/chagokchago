@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capibara.chagokchago.R
-import com.capibara.chagokchago.model.Location
+import com.capibara.chagokchago.model.LocationDto
 import com.capibara.chagokchago.OnSearchItemClickListener
 
 class SearchAdapter(
     private val onSearchItemClickListener: OnSearchItemClickListener
-) : ListAdapter<Location, SearchAdapter.SearchViewHolder>(
-    object : DiffUtil.ItemCallback<Location>() {
-        override fun areItemsTheSame(oldItem: Location, newItem: Location) =
+) : ListAdapter<LocationDto, SearchAdapter.SearchViewHolder>(
+    object : DiffUtil.ItemCallback<LocationDto>() {
+        override fun areItemsTheSame(oldItem: LocationDto, newItem: LocationDto) =
             oldItem.place == newItem.place
 
-        override fun areContentsTheSame(oldItem: Location, newItem: Location) =
+        override fun areContentsTheSame(oldItem: LocationDto, newItem: LocationDto) =
             oldItem == newItem
     }
 ) {
@@ -39,7 +39,7 @@ class SearchAdapter(
         private val address: TextView = view.findViewById(R.id.address)
         private val category: TextView = view.findViewById(R.id.category)
 
-        fun bindViewHolder(location: Location, onSearchItemClickListener: OnSearchItemClickListener) {
+        fun bindViewHolder(location: LocationDto, onSearchItemClickListener: OnSearchItemClickListener) {
             place.text = location.place
             address.text = location.address
             category.text = location.category

@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.capibara.chagokchago.R
 import com.capibara.chagokchago.databinding.ActivityChargeBinding
-import com.capibara.chagokchago.model.BankItem
+import com.capibara.chagokchago.model.BankItemDto
 import com.capibara.chagokchago.model.adapter.BankSpinnerAdapter
 
 class ChargeActivity : AppCompatActivity() {
@@ -29,12 +29,12 @@ class ChargeActivity : AppCompatActivity() {
 
         // Spinner에 사용할 데이터: BankItem 리스트
         val bankList = listOf(
-            BankItem("입금하실 은행을\n선택하세요", R.drawable.baseline_attach_money_24),
-            BankItem("농협은행", R.drawable.ic_nonghyup),
-            BankItem("카카오뱅크", R.drawable.ic_kakaobank),
-            BankItem("KB국민은행", R.drawable.ic_kb),
-            BankItem("우리은행", R.drawable.ic_shinhan),
-            BankItem("하나은행", R.drawable.ic_hana)
+            BankItemDto("입금하실 은행을\n선택하세요", R.drawable.baseline_attach_money_24),
+            BankItemDto("농협은행", R.drawable.ic_nonghyup),
+            BankItemDto("카카오뱅크", R.drawable.ic_kakaobank),
+            BankItemDto("KB국민은행", R.drawable.ic_kb),
+            BankItemDto("우리은행", R.drawable.ic_shinhan),
+            BankItemDto("하나은행", R.drawable.ic_hana)
         )
 
         // 커스텀 어댑터 생성

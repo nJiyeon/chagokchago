@@ -7,7 +7,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.capibara.chagokchago.model.Location
+import com.capibara.chagokchago.model.LocationDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,14 +17,14 @@ class MainViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val sharedPreferences: SharedPreferences = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    private val _lastMarkerPosition = MutableLiveData<Location?>()
-    val lastMarkerPosition: LiveData<Location?> get() = _lastMarkerPosition
+    private val _lastMarkerPosition = MutableLiveData<LocationDto?>()
+    val lastMarkerPosition: LiveData<LocationDto?> get() = _lastMarkerPosition
 
     init {
         loadLastMarkerPosition()
     }
 
-    fun saveLastMarkerPosition(location: Location) {
+    fun saveLastMarkerPosition(location: LocationDto) {
         with(sharedPreferences.edit()) {
             putFloat(PREF_LATITUDE, location.latitude.toFloat())
             putFloat(PREF_LONGITUDE, location.longitude.toFloat())
@@ -43,7 +43,7 @@ class MainViewModel @Inject constructor(
             val roadAddressName = sharedPreferences.getString(PREF_ROAD_ADDRESS_NAME, "") ?: ""
 
             _lastMarkerPosition.value = if (placeName.isNotEmpty() && roadAddressName.isNotEmpty()) {
-                Location(place = placeName, address = roadAddressName, category = "", latitude = latitude, longitude = longitude)
+                LocationDto(place = placeName, address = roadAddressName, category = "", latitude = latitude, longitude = longitude)
             } else {
                 null
             }

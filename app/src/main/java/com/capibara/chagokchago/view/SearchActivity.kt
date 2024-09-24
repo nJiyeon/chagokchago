@@ -10,7 +10,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capibara.chagokchago.databinding.ActivitySearchBinding
-import com.capibara.chagokchago.model.Location
+import com.capibara.chagokchago.model.LocationDto
 import com.capibara.chagokchago.OnKeywordItemClickListener
 import com.capibara.chagokchago.OnSearchItemClickListener
 import com.capibara.chagokchago.model.adapter.KeywordAdapter
@@ -70,7 +70,7 @@ class SearchActivity : AppCompatActivity(), OnSearchItemClickListener, OnKeyword
         }
     }
 
-    override fun onSearchItemClick(location: Location) {
+    override fun onSearchItemClick(location: LocationDto) {
         // 검색 항목 클릭 시 선택된 데이터를 반환하고 검색어 저장
         keywordViewModel.saveKeyword(location.place)
         val resultIntent = Intent().apply {
