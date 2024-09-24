@@ -1,4 +1,4 @@
-package com.capibara.chagokchago
+package com.capibara.chagokchago.view
 
 import com.capibara.chagokchago.model.LocationDto
 

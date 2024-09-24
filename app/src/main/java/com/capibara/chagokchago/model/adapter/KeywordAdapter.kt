@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capibara.chagokchago.R
-import com.capibara.chagokchago.OnKeywordItemClickListener
+import com.capibara.chagokchago.view.OnKeywordItemClickListener
 
 class KeywordAdapter(private val onKeywordItemClickListener: OnKeywordItemClickListener) :
     ListAdapter<String, KeywordAdapter.KeywordViewHolder>(
