@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var bottomSheetTitle: TextView
     private lateinit var bottomSheetAddress: TextView
+    private lateinit var bottomSheetCategory: TextView
     private lateinit var bottomSheetLayout: FrameLayout
     private lateinit var searchResultLauncher: ActivityResultLauncher<Intent>
 
@@ -141,11 +142,12 @@ class MainActivity : AppCompatActivity() {
         // ViewModel의 마지막 마커 위치 관찰
         mainViewModel.lastMarkerPosition.observe(this) { location: LocationDto? ->
             location?.let { loc ->
-                Log.d(TAG, "Loaded last marker position: lat=${loc.latitude}, lon=${loc.longitude}, placeName=${loc.place}, roadAddressName=${loc.address}")
+                //Log.d(TAG, "Loaded last marker position: lat
+                // {loc.latitude}, lon=${loc.longitude}, placeName=${loc.place}, roadAddressName=${loc.address}")
                 addLabel(loc)
                 val position = LatLng.from(loc.latitude, loc.longitude)
                 moveCamera(position)
-                updateBottomSheet(loc.place, loc.address)
+                updateBottomSheet(loc.place, loc.address, loc.category)
             }
         }
     }
@@ -163,6 +165,7 @@ class MainActivity : AppCompatActivity() {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
         bottomSheetTitle = binding.bottomSheetTitle
         bottomSheetAddress = binding.bottomSheetAddress
+        bottomSheetCategory = binding.bottomSheetCategory
     }
 
     private fun handleSearchResult(data: Intent?) {
@@ -244,9 +247,9 @@ class MainActivity : AppCompatActivity() {
         labelLayer?.addLabel(
             LabelOptions.from(placeName, position).setStyles(styles).setTexts(placeName)
         )
-
         moveCamera(position)
-        updateBottomSheet(placeName, location.address)
+        updateBottomSheet(placeName, location.address, location.category)
+
     }
 
     private fun moveCamera(position: LatLng) {
@@ -256,9 +259,10 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun updateBottomSheet(placeName: String, roadAddressName: String) {
+    private fun updateBottomSheet(placeName: String, roadAddressName: String, roadCategory: String) {
         bottomSheetTitle.text = placeName
         bottomSheetAddress.text = roadAddressName
+        bottomSheetCategory.text = roadCategory
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetLayout.visibility = View.VISIBLE
     }

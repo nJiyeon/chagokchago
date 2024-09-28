@@ -142,6 +142,15 @@
                         android:textSize="14sp"
                         android:textColor="@android:color/black"
                         android:layout_marginTop="8dp" />
+                    <TextView
+                        android:id="@+id/bottomSheetCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="Category"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_font"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
             </FrameLayout>
 
