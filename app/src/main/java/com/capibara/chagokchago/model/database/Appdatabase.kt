@@ -2,6 +2,7 @@ package com.capibara.chagokchago.model.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.capibara.chagokchago.model.dto.ParkingSpaceDto
 import com.capibara.chagokchago.model.entity.KeywordEntity
 import com.capibara.chagokchago.model.entity.LocationEntity
 import com.capibara.chagokchago.model.repository.KeywordDao
@@ -11,4 +12,5 @@ import com.capibara.chagokchago.model.repository.LocationDao
 abstract class AppDatabase : RoomDatabase() {
     abstract fun keywordDao(): KeywordDao
     abstract fun locationDao(): LocationDao
+
 }

@@ -53,4 +53,5 @@ object DatabaseModule {
     fun provideLocationSearcher(locationDao: LocationDao): LocationRepository {
         return LocationRepository(locationDao)
     }
+
 }
