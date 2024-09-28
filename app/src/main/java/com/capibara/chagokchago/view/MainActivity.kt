@@ -26,6 +26,7 @@ import com.capibara.chagokchago.model.dto.LocationDto
 import com.capibara.chagokchago.model.repository.LocationRepository
 import com.capibara.chagokchago.viewmodel.KeywordViewModel
 import com.capibara.chagokchago.viewmodel.MainViewModel
+import com.capibara.chagokchago.viewmodel.ParkingSpaceViewModel
 import com.google.android.material.navigation.NavigationView
 import com.kakao.vectormap.label.LabelLayer
 import com.kakao.vectormap.label.LabelOptions
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     // ViewModel을 Lazy하게 제공받기
     private val keywordViewModel: KeywordViewModel by viewModels()
     private val mainViewModel: MainViewModel by viewModels()
-
+    private val parkingSpaceViewModel: ParkingSpaceViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -150,6 +151,16 @@ class MainActivity : AppCompatActivity() {
                 updateBottomSheet(loc.place, loc.address, loc.category)
             }
         }
+        // ViewModel을 통해 주차장 정보 관찰 및 마커 추가
+        parkingSpaceViewModel.parkingSpaces.observe(this) { parkingSpaces ->
+                    parkingSpaces?.forEach { parkingSpace ->
+                        val locationDto = parkingSpace.toLocationDto() // 주차장 정보를 LocationDto로 변환
+                        addLabel(locationDto) // 각 주차장 위치에 마커(라벨) 표시
+                    }
+                }
+
+        // 주차장 정보 로드 호출 (앱 시작 시 지속적으로 주차장 정보 표시)
+        parkingSpaceViewModel.loadParkingSpaces()
     }
 
     private fun initializeViews(binding: ActivityMainBinding) {
