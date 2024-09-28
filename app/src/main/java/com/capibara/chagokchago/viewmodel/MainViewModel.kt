@@ -8,17 +8,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.capibara.chagokchago.model.dto.LocationDto
+import com.capibara.chagokchago.model.repository.LocationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    application: Application
-) : AndroidViewModel(application) {
+class MainViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
 
     private val sharedPreferences: SharedPreferences = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val _lastMarkerPosition = MutableLiveData<LocationDto?>()
     val lastMarkerPosition: LiveData<LocationDto?> get() = _lastMarkerPosition
+
 
     init {
         loadLastMarkerPosition()
