@@ -12,7 +12,6 @@ interface ApiService {
     @POST("/auth/register")  // 엔드포인트 수정
     fun registerUser(@Body registerRequest: RegisterRequestDto): Call<Void>
 
-    @GET("/parking/available/parkingspace")
-        fun parkingSpace(@Body parkingSpace: ParkingSpaceDto)
-
+    @GET("/parking/available/parkingspace") // 주차장 정보 조회 API
+    suspend fun getParkingSpaces(): List<ParkingSpaceDto> // 주차장 정보 리스트 반환
 }
