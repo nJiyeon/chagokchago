@@ -23,6 +23,7 @@ class ParkingSpaceRepository @Inject constructor(
             parkingSpaces  // 성공적으로 데이터를 가져오면 반환
         } catch (e: Exception) {
             Log.e("error", "정보를 가져오지 못했습니다")
+            Log.e("페치에러", e.message.toString())
             null
         }
     }

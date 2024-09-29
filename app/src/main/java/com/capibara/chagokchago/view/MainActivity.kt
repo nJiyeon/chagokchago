@@ -151,16 +151,23 @@ class MainActivity : AppCompatActivity() {
                 updateBottomSheet(loc.place, loc.address, loc.category)
             }
         }
-        // ViewModel을 통해 주차장 정보 관찰 및 마커 추가
-        parkingSpaceViewModel.parkingSpaces.observe(this) { parkingSpaces ->
-                    parkingSpaces?.forEach { parkingSpace ->
-                        val locationDto = parkingSpace.toLocationDto() // 주차장 정보를 LocationDto로 변환
-                        addLabel(locationDto) // 각 주차장 위치에 마커(라벨) 표시
-                    }
-                }
+        initDefaultParkingSpaces()
 
         // 주차장 정보 로드 호출 (앱 시작 시 지속적으로 주차장 정보 표시)
         parkingSpaceViewModel.loadParkingSpaces()
+    }
+
+    private fun initDefaultParkingSpaces() {
+//        var lastLocation: LocationDto;
+        parkingSpaceViewModel.parkingSpaces.observe(this) { parkingSpaces ->
+            parkingSpaces?.forEach { parkingSpace ->
+                Log.d("파킹", parkingSpace.toString())
+                val locationDto = parkingSpace.toLocationDto() // 주차장 정보를 LocationDto로 변환
+                moveCamera(LatLng.from(locationDto.latitude, locationDto.longitude))
+//                lastLocation = locationDto
+                addLabel(locationDto) // 각 주차장 위치에 마커(라벨) 표시
+            }
+        }
     }
 
     private fun initializeViews(binding: ActivityMainBinding) {
@@ -189,8 +196,8 @@ class MainActivity : AppCompatActivity() {
         val placeName = data.getStringExtra("place_name")
         val roadAddressName = data.getStringExtra("road_address_name")
         val roadCategory = data.getStringExtra("category_group_name")
-        val latitude = data.getDoubleExtra("latitude", 0.0)
-        val longitude = data.getDoubleExtra("longitude", 0.0)
+        val latitude = data.getDoubleExtra("latitude", 35.8905)
+        val longitude = data.getDoubleExtra("longitude", 128.6121826171875)
 
         if (placeName == null || roadAddressName == null) {
             showToast("검색 결과가 유효하지 않습니다.")
@@ -202,6 +209,7 @@ class MainActivity : AppCompatActivity() {
         // 검색 결과 위치로 이동
         val location = roadCategory?.let { LocationDto(place = placeName, address = roadAddressName, category = it, latitude = latitude, longitude = longitude) }
         if (location != null) {
+            moveCamera(latitude, longitude)
             addLabel(location)
         }
         if (location != null) {
@@ -258,15 +266,19 @@ class MainActivity : AppCompatActivity() {
         labelLayer?.addLabel(
             LabelOptions.from(placeName, position).setStyles(styles).setTexts(placeName)
         )
-        moveCamera(position)
-        updateBottomSheet(placeName, location.address, location.category)
 
+        updateBottomSheet(placeName, location.address, location.category)
     }
 
+    private fun moveCamera(latitude: Double, longitude: Double) {
+        val position = LatLng.from(latitude, longitude)
+        moveCamera(position)
+    }
     private fun moveCamera(position: LatLng) {
+        Log.d("POSITION", position.toString())
         kakaoMap?.moveCamera(
             CameraUpdateFactory.newCenterPosition(position),
-            CameraAnimation.from(CAMERA_ANIMATION_DURATION, false, false)
+//            CameraAnimation.from(CAMERA_ANIMATION_DURATION, false, false)
         )
     }
 
